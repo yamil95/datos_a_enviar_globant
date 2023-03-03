@@ -66,17 +66,17 @@ def crear_diccionario (valores_dataframe,nombre_archivo):
 def read_csv ():
     
     archivos_csv = glob.glob('**/*.csv', recursive=True)
-
-
+    
     for archivo in archivos_csv:
         with pd.read_csv(archivo, chunksize=1000,header=None,dtype=str) as reader:
             contador = 0
             for chunk in reader:
-                payload = crear_diccionario(chunk.values,archivo)
+                #nombre_archivo = archivo.split("\\")[1]
                 endpoint = archivo.split(".")[0]
-                enviar_csv(payload,endpoint,contador)
-                contador = contador +1 
+                payload = crear_diccionario(chunk.values,archivo)
+                enviar_csv(payload,endpoint,contador) 
             contador = 0
+        
            
         
 
